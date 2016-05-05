@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/angular-chart.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/Chart.js"></script>
+    <script src="js/angular-chart.min.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script type="text/javascript">
+      function showSideMenu(){
+        document.getElementById("sideMenu").className="sideMenu showSideMenu";
+        document.getElementById("pane").className="pane hidePane";
+        document.getElementById("pane").style.pointerEvents="none";
+      }
+
+      function hideSideMenu(){
+        document.getElementById("sideMenu").className="sideMenu hideSideMenu";
+        document.getElementById("pane").className="pane showPane";
+        document.getElementById("pane").style.pointerEvents="auto";
+      }
+
+      function waterLevelIconPositive(){
+        document.getElementById("waterLevelIcon").className="icon ion-checkmark-circled positive";
+      }
+
+      function waterLevelIconNegative(){
+        document.getElementById("waterLevelIcon").className="icon ion-android-alert assertive";
+      }
+
+      function daysIconPositive(){
+        document.getElementById("daysIcon").className="icon ion-checkmark-circled positive";
+      }
+
+      function daysIconNegative(){
+        document.getElementById("daysIcon").className="icon ion-android-alert assertive";
+      }
+
+      function statusIconPositive(){
+        document.getElementById("statusIcon").className="icon ion-checkmark-circled positive";
+      }
+
+      function statusIconNegative(){
+        document.getElementById("statusIcon").className="icon ion-android-alert assertive";
+      }
+
+      function setDeviceId(id){
+        document.getElementById("deviceId").innerHTML="Device ID: "+id;
+      }
+
+      function setWaterLevel(prcnt){
+
+        document.getElementById("waterLevel").innerHTML="&nbspWater Level: "+prcnt.toString()+"%";
+
+        if(prcnt>=80){
+          waterLevelIconNegative();
+        }
+        else{
+          waterLevelIconPositive();
+        }
+      }
+
+      function setDays(num){
+        if(num<=1){
+          document.getElementById("days").innerHTML="&nbspDays Without Replacing: "+num.toString()+"Day";
+        }
+        else{
+          document.getElementById("days").innerHTML="&nbspDays Without Replacing: "+num.toString()+"Days";
+        }
+
+        if(num<=2){
+          daysIconPositive();
+        }
+        else{
+          daysIconNegative();
+        }
+      }
+
+      function setStatus(prcnt, num){
+        var str;
+
+        str="&nbspStatus: ";
+
+        if(prcnt<50){
+          str+="The water level is less than 50%. ";
+        }
+        else if(prcnt<75){
+          str+="The water level is less than 75%. ";
+        }
+        else if(prcnt<100){
+          str+="The container is nearly full. ";
+        }
+        else{
+          str+="The container is full. Reduce water to prevent overflow. ";
+        }
+
+        if(days<=2){
+          str+="The water is of good condition.";
+        }
+        else{
+          str+="Please replace the stagnant water.";
+        }
+        
+        if(prcnt>=80 || num>=3){
+          statusIconNegative();
+        }
+        else{
+          statusIconPositive();
+        }
+      }
+    </script>
+  </head>
+  <body ng-app="starter">
+    <div class="sideMenu" id="sideMenu">
+      <div class="bar bar-header bar-positive" style="position: relative;">
+        <button class="button button-icon icon ion-chevron-left" onclick="hideSideMenu()"></button>
+        <h1 class="title">Menu</h1>
+      </div>
+
+      <ul class="list">
+        <a class="item" href="index.html">
+          <i class="icon ion-home"></i>
+          Home
+        </a>
+
+        <a class="item" href="about.html">
+          <i class="icon ion-information-circled"></i>
+          About
+        </a>
+      </ul>
+    </div>
+
+    <ion-pane id="pane" class="pane">
+      <ion-header-bar class="bar bar-header bar-positive">
+        <button class="button button-icon icon ion-navicon-round" onclick="showSideMenu()"></button>
+        <h1 class="title">Home</h1>
+      </ion-header-bar>
+
+      <ion-content>
+        <div class="card">
+          <div id="deviceId" class="item item-divider">
+            Device ID: 1
+          </div>
+
+          <div class="item item-body item-text-wrap">
+            <i id="waterLevelIcon" class="icon ion-checkmark-circled positive" style="float: left"></i>
+            <div id="waterLevel">
+              &nbspWater Level: 60%
+            </div>
+          </div>
+
+          <div class="item item-body item-text-wrap">
+            <i id="daysIcon" class="icon ion-android-alert assertive" style="float: left"></i>
+            <div id="days">
+              &nbspDays Without Replacing: 3 Days
+            </div>
+          </div>
+
+          <div class="item item-body item-text-wrap">
+            <i id="statusIcon" class="icon ion-android-alert assertive" style="float: left"></i>
+            <div id="status">
+              &nbspStatus:
+              Basin is nearly full.
+              Please replace the stagnant water.
+            </div>
+          </div>
+        </div>
+
+        <div class="card" ng-controller="WaterHistoryController">
+          <div class="item item-divider">
+            Water Level History
+          </div>
+          <div class="item item-text-wrap">
+            <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+          </div>
+        </div>
+
+        <div class="card" ng-controller="DayHistoryController">
+          <div class="item item-divider">
+            Water Replacement History
+          </div>
+          <div class="item item-text-wrap">
+            <canvas id="bar" class="chart chart-bar" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+          </div>
+        </div>
+      </ion-content>
+    </ion-pane>
+  </body>
+</html>
