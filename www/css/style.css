@@ -1,0 +1,172 @@
+.pane{
+  left: 0;
+}
+
+.sideMenu{
+  width: 50%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left:-50%;
+  box-shadow: 1px 0px 7px grey;
+  z-index: 100;
+  background-color: white;
+}
+
+.showSideMenu{
+  animation: sideMenuSlideRight 250ms;
+  animation-fill-mode: forwards;
+
+  -webkit-animation: sideMenuSlideRight 250ms;
+  -webkit-animation-fill-mode: forwards;
+
+  -moz-animation: sideMenuSlideRight 250ms;
+  -moz-animation-fill-mode: forwards;
+}
+
+.hideSideMenu{
+  animation: sideMenuSlideLeft 250ms;
+  animation-fill-mode: forwards;
+
+  -webkit-animation: sideMenuSlideLeft 250ms;
+  -webkit-animation-fill-mode: forwards;
+
+  -moz-animation: sideMenuSlideLeft 250ms;
+  -moz-animation-fill-mode: forwards;
+}
+
+@keyframes sideMenuSlideRight{
+  from{
+    left:-50%;
+  }
+  to{
+    left:0%;
+  }
+}
+
+@-webkit-keyframes sideMenuSlideRight{
+  from{
+    left:-50%;
+  }
+  to{
+    left:0%;
+  }
+}
+
+@-moz-keyframes sideMenuSlideRight{
+  from{
+    left:-50%;
+  }
+  to{
+    left:0%;
+  }
+}
+
+@keyframes sideMenuSlideLeft{
+  from{
+    left:0%;
+  }
+  to{
+    left:-50%;
+  }
+}
+
+@-webkit-keyframes sideMenuSlideLeft{
+  from{
+    left:0%;
+  }
+  to{
+    left:-50%;
+  }
+}
+
+@-moz-keyframes sideMenuSlideLeft{
+  from{
+    left:0%;
+  }
+  to{
+    left:-50%;
+  }
+}
+
+.hidePane{
+  animation: paneSlideRight 250ms;
+  animation-fill-mode: forwards;
+
+  -webkit-animation: paneSlideRight 250ms;
+  -webkit-animation-fill-mode: forwards;
+
+  -moz-animation: paneSlideRight 250ms;
+  -moz-animation-fill-mode: forwards;
+}
+
+.showPane{
+  animation: paneSlideLeft 250ms;
+  animation-fill-mode: forwards;
+
+  -webkit-animation: paneSlideLeft 250ms;
+  -webkit-animation-fill-mode: forwards;
+
+  -moz-animation: paneSlideLeft 250ms;
+  -moz-animation-fill-mode: forwards;
+}
+
+@keyframes paneSlideRight{
+  from{
+    left: 0%;
+  }
+  to{
+    left: 50%;
+  }
+}
+
+@-webkit-keyframes paneSlideRight{
+  from{
+    left: 0%;
+  }
+  to{
+    left: 50%;
+  }
+}
+
+@-moz-keyframes paneSlideRight{
+  from{
+    left: 0%;
+  }
+  to{
+    left: 50%;
+  }
+}
+
+@keyframes paneSlideLeft{
+  from{
+    left: 50%;
+  }
+  to{
+    left: 0%;
+  }
+}
+
+@-webkit-keyframes paneSlideLeft{
+  from{
+    left: 50%;
+  }
+  to{
+    left: 0%;
+  }
+}
+
+@-moz-keyframes paneSlideLeft{
+  from{
+    left: 50%;
+  }
+  to{
+    left: 0%;
+  }
+}
+
+.aboutIcon{
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+}
