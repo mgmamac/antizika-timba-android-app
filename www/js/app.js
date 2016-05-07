@@ -43,7 +43,7 @@ angular.module('starter', ['ionic', 'ngMaterial', 'chart.js', 'angularMoment'])
   $scope.series = ["Sensor Readings"];
 	$scope.getDevice = function()
 	{
-		$http.get("/api/device/" + $scope.deviceId + "?t=" + Date.now().toString(), config)
+		$http.get("http://triton145.azurewebsites.net/api/device/" + $scope.deviceId + "?t=" + Date.now().toString(), config)
 		.then(function success(res)
 		{
 			if (updateTask)
@@ -72,7 +72,7 @@ angular.module('starter', ['ionic', 'ngMaterial', 'chart.js', 'angularMoment'])
         var now = new Date();
         var lastEmptied = new Date(res.data.lastEmptied);
         var diff = now.getTime() - lastEmptied.getTime();
-        if (diff >= 259200000) // 259200000 ms is 3 days
+        if (diff >= 30000) // 259200000 ms is 3 days
         {
           $scope.isStagnant = true;
         }

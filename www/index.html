@@ -31,6 +31,34 @@
     <script src="lib/angular-material/angular-material.min.js"></script>
     <!-- Angular modules & controllers -->
     <script src="js/app.js"></script>
+
+    <script>
+      function showSideMenu(){
+        document.getElementById("sideMenu").className="sideMenu showSideMenu";
+        document.getElementById("homePane").className="pane paneRight";
+        document.getElementById("aboutPane").className="pane paneRight";
+      }
+
+      function hideSideMenu(){
+        document.getElementById("sideMenu").className="sideMenu hideSideMenu";
+        document.getElementById("homePane").className="pane paneLeft";
+        document.getElementById("aboutPane").className="pane paneLeft";
+      }
+
+      function showHome(){
+        document.getElementById("homePane").style.opacity="1";
+        document.getElementById("aboutPane").style.opacity="0";
+        document.getElementById("homePane").style.pointerEvents="auto";
+        document.getElementById("aboutPane").style.pointerEvents="none";
+      }
+
+      function showAbout(){
+        document.getElementById("aboutPane").style.opacity="1";
+        document.getElementById("homePane").style.opacity="0";
+        document.getElementById("aboutPane").style.pointerEvents="auto";
+        document.getElementById("homePane").style.pointerEvents="none";
+      }
+    </script>
     
   </head>
   <body ng-app="starter">
@@ -41,19 +69,19 @@
       </div>
 
       <ul class="list">
-        <a class="item" href="index.html">
+        <li class="item" onclick="showHome()">
           <i class="icon ion-home"></i>
           Home
-        </a>
+        </li>
 
-        <a class="item" href="about.html">
+        <li class="item" onclick="showAbout()">
           <i class="icon ion-information-circled"></i>
           About
-        </a>
+        </li>
       </ul>
     </div>
 
-    <ion-pane id="pane" class="pane">
+    <ion-pane id="homePane" class="pane">
       <ion-header-bar class="bar bar-header bar-positive">
         <button class="button button-icon icon ion-navicon-round" onclick="showSideMenu()"></button>
         <h1 class="title">CS 145 Best Capstone Project</h1>
@@ -82,6 +110,76 @@
           </canvas> 
           </md-card-content>
         </md-card>
+      </ion-content>
+    </ion-pane>
+
+    <ion-pane id="aboutPane" class="pane" style="opacity: 0; pointer-events: none;">
+      <ion-header-bar class="bar bar-header bar-positive">
+        <button class="button button-icon icon ion-navicon-round" onclick="showSideMenu()"></button>
+        <h1 class="title">About</h1>
+      </ion-header-bar>
+
+      <ion-content>
+        <div class="card">
+          <div class="item item-divider text-center">
+            About
+          </div>
+          <div class="item item-text-wrap">
+            This CS 145 Capstone Project aims to create Arduino-based water level sensors (using ultrasonic proximity sensing) that are connected to a RESTful API for recording, retrieving and analyzing water level data. This will help conserve water, detect stagnant water to prevent the spread of disease-carrying mosquitoes, and give people a better overview of how their water is being used. The hardware side uses ACEduinos with Ethernet shields and the server side is built on NodeJS, Express and MongoDB. The front-end apps are being built using AngularJS.
+
+            This project is currently private on GitHub.
+          </div>
+        </div>
+
+        <div class="card text-center">
+          <div class="item item-divider">
+            <img src="img/logo_big.png" class="aboutIcon">
+            <div>
+              The Team
+            </div>
+          </div>
+
+          <div class="item item-text-wrap">
+            <img src="img/vincent.jpg" class="aboutIcon">
+            <h2>Vincent Paul Fiestada</h2>
+          </div>
+
+          <div class="item item-text-wrap">
+            <img src="img/team_member_2.jpg" class="aboutIcon">
+            <h2>Faith Therese Peña</h2>
+          </div>
+
+          <div class="item item-text-wrap">
+            <img src="img/team_member_3.jpg" class="aboutIcon">
+            <h2>Kristia Gail Alcancia</h2>
+          </div>
+
+          <div class="item item-text-wrap">
+            <img src="img/team_member_4.jpg" class="aboutIcon">
+            <h2>Mark Anton Mamac</h2>
+          </div>
+
+          <div class="item item-text-wrap">
+            <img src="img/team_member_5.jpg" class="aboutIcon">
+            <h2>Kerwin Delos Santos</h2>
+          </div>
+
+          <div class="item item-text-wrap">
+            <img src="img/team_member_6.jpg" class="aboutIcon">
+            <h2>Jaypee Renz San Gabriel</h2>
+          </div>
+        </div>
+
+        <div class="card text-center">
+          <div class="item item-divider">
+            Additional Credits
+          </div>
+          <div class="item item-text-wrap">
+            <p>Special thanks to the designers at Material Design Icons</p>
+            <p>The (temporary) icon is from the excellent Total War: Rome 2 game.</p>
+          </div>
+        </div>
+
       </ion-content>
     </ion-pane>
   </body>

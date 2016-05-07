@@ -89,7 +89,7 @@
   }
 }
 
-.hidePane{
+.paneRight{
   animation: paneSlideRight 250ms;
   animation-fill-mode: forwards;
 
@@ -100,7 +100,7 @@
   -moz-animation-fill-mode: forwards;
 }
 
-.showPane{
+.paneLeft{
   animation: paneSlideLeft 250ms;
   animation-fill-mode: forwards;
 
